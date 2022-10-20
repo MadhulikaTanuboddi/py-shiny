@@ -114,3 +114,20 @@ class RadioButtonsInput:
 
     def locate_by_value(self, value: str) -> Locator:
         return self.loc.locator("input[type=radio][value={value}]")
+
+# Shiny Outputs
+class PlotOutput():
+    def __init__(self, page: Page, inputId: str):
+        self.loc = page.locator(f"#{inputId}.shiny-plot-output.shiny-bound-output img")
+
+    @property
+    def expect(self):
+        return expect(self.loc)
+
+# Other
+class NavControls():
+    '''navControlType represents the type of navigation options available
+    for example: navset_tab, navset_pill, navset_tab_card, navset_pill_card, navset_pill_list'''
+
+    def __init__(self, page: Page, navControlType: str, navItem: str):
+        self.loc = page.locator(f".nav.{navControlType} .nav-item a[data-value={navItem}]")
